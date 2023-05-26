@@ -1,0 +1,49 @@
+﻿@model DemoMvc.Models.AddEmployeeModel;
+
+@Html.ValidationSummary()
+<form method="post" action="Add" class="mt-10">
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">Email</label>
+        <input type="email" class="form-control" asp-for="Email">
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">Salary</label>
+        <input type="number" class="form-control" asp-for="Salary">
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">DateOfBirth</label>
+        <input type="date" class="form-control" asp-for="DateOfBirth">
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">Department</label>
+        <input type="text" class="form-control" asp-for="Department">
+        <span asp-validation-for="Department"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">City</label>
+        <input type="text" class="form-control" asp-for="City">
+        <span asp-validation-for="City"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">Phone Number</label>
+        <input type="text" class="form-control" asp-for="PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

@@ -1,0 +1,29 @@
+﻿@model DemoMvc.Models.Customer.UpdateCus
+@{
+    ViewData["Title"] = "Update Customers";
+}
+
+<h1>Update Customers</h1>
+
+<form method="post" action="Update" class="mt-10">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="number" class="form-control" asp-for="Id" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" >Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" >PhoneNumber</label>
+        <input type="tel" class="form-control" asp-for="PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-danger" asp-action="Delete"
+        asp-controller="Customer">Delete</button>
+</form>
