@@ -17,24 +17,43 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Employee
+                    </button>
+                    <ul class="dropdown-menu">
+                         <li class="nav-item dropdown-item">
+                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Add">Add Employee</a>
+                         </li>
+                        
+                         <li class="nav-item dropdown-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="View">Show Employee</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Add">Add Employee</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Add">Add Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Show">Show Customers</a>
-                        </li>
-                     
+
                     </ul>
                 </div>
-            </div>
+               
+                
+                <div class="dropdown px-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Customer
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Add">Add Customer</a>
+                        </li>
+
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="View">Show Customers</a>
+                        </li>
+
+                    </ul>
+                </div>
+                
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    </div>
+                </div>
         </nav>
     </header>
     <div class="container">
