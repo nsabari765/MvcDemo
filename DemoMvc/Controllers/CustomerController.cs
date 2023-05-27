@@ -16,7 +16,7 @@ namespace DemoMvc.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Show(Employee emp)
+        public async Task<ActionResult> View(Employee emp)
         {
             var customers = await dbCon.Customers.ToListAsync();
             return View(customers);
@@ -39,7 +39,7 @@ namespace DemoMvc.Controllers
                 return await Task.Run(() => View("Update", Update));
             }
 
-            return RedirectToAction("Show");
+            return RedirectToAction("View");
         }
 
         [HttpPost]
@@ -53,10 +53,10 @@ namespace DemoMvc.Controllers
 
                 await dbCon.SaveChangesAsync();
 
-                return RedirectToAction("Show");
+                return RedirectToAction("View");
             }
 
-            return RedirectToAction("Show");
+            return RedirectToAction("View");
         }
 
         [HttpGet]
@@ -90,9 +90,9 @@ namespace DemoMvc.Controllers
 
                 await dbCon.SaveChangesAsync();
 
-                return RedirectToAction("Show");
+                return RedirectToAction("View");
             }
-            return RedirectToAction("Show");
+            return RedirectToAction("View");
         }
     }
 }

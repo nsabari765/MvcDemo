@@ -15,7 +15,7 @@ namespace DemoMvc.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> View(Employee employee)
         {
             var employees = await dataContext.Employees.ToListAsync();
             return View(employees); 
@@ -53,13 +53,13 @@ namespace DemoMvc.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> View(Guid id)
+        public async Task<IActionResult> Update(Guid id)
         {
            var employee = await dataContext.Employees.FirstOrDefaultAsync(em => em.Id == id);
 
             if (employee != null)
             {
-                var em = new UpdateEmployeeDetails()
+                var employees = new UpdateEmployeeDetails()
                 {
                     Id = employee.Id,
                     Name = employee.Name,
@@ -72,14 +72,14 @@ namespace DemoMvc.Controllers
 
                 };
 
-                return await Task.Run(() => View("View",em));
+                return await Task.Run(() => View("Update",employees));
             }
            
-           return RedirectToAction("Index");
+           return RedirectToAction("View");
         }
 
         [HttpPost]
-        public async Task<IActionResult> View(UpdateEmployeeDetails up)
+        public async Task<IActionResult> Update(UpdateEmployeeDetails up)
         {
             var employee = await dataContext.Employees.FindAsync(up.Id);
 
@@ -95,10 +95,10 @@ namespace DemoMvc.Controllers
 
                 await dataContext.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("View");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("View");
         }
 
         [HttpPost]
@@ -112,10 +112,10 @@ namespace DemoMvc.Controllers
 
                await  dataContext.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("View");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("View");
         }
     }
 }

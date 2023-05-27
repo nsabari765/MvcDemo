@@ -15,8 +15,6 @@ namespace DemoMvc.Models
         [Required]
         public DateTime? DateOfBirth { get; set; }
         public string? Department { get; set; }
-        [Required]
-        [Phone]
         public long? PhoneNumber { get; set; }
         [Required(AllowEmptyStrings =false)]
         [StringLength(15)]
