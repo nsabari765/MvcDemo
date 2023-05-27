@@ -1,6 +1,5 @@
 ﻿using DemoMvc.Data;
 using DemoMvc.Models;
-using DemoMvc.Models.Customer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,90 +7,78 @@ namespace DemoMvc.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly DataContext dbCon;
+        private readonly DataContext _dataContext;
 
-        public CustomerController(DataContext DbCon)
+        public CustomerController(DataContext dataContext)
         {
-            dbCon = DbCon;
+            _dataContext = dataContext;
         }
 
         [HttpGet]
-        public async Task<ActionResult> View(Employee emp)
+        public async Task<ActionResult> View()
         {
-            var customers = await dbCon.Customers.ToListAsync();
+            var customers = await _dataContext.Customers.ToListAsync();
             return View(customers);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Update(int id)
-        {
-            var customer = await dbCon.Customers.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (customer != null)
-            {
-                var Update = new UpdateCus()
-                {
-                    Id = customer.Id,
-                    Name = customer.Name,
-                    PhoneNumber = customer.PhoneNumber
-                };
-
-                return await Task.Run(() => View("Update", Update));
-            }
-
-            return RedirectToAction("View");
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Update(UpdateCus up)
-        {
-            var cus = await dbCon.Customers.FindAsync(up.Id);
-            if (cus != null)
-            {
-                cus.Name = up.Name;
-                cus.PhoneNumber = up.PhoneNumber;
-
-                await dbCon.SaveChangesAsync();
-
-                return RedirectToAction("View");
-            }
-
-            return RedirectToAction("View");
         }
 
         [HttpGet]
         public ActionResult Add()
         {
-            return View();
+            return View(new Customer());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(AddCus ac)
+        public async Task<ActionResult> Add(Customer customer)
         {
-            var customer = new Customer()
-            {
-                Name = ac.Name,
-                PhoneNumber = ac.PhoneNumber,
-            };
+            await _dataContext.AddAsync(customer);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction("View");
+        }
 
-            await dbCon.AddAsync(customer);
-            await dbCon.SaveChangesAsync();
-            return RedirectToAction("Add");
+        [HttpGet]
+        public async Task<ActionResult> Update(int id)
+        {
+            var customer = await _dataContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (customer != null)
+            {
+                return await Task.Run(() => View("Update", customer));
+            }
+
+            return RedirectToAction("View");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(UpdateCus del)
+        public async Task<ActionResult> Update(Customer updateCustomer)
         {
-            var cus = dbCon.Customers.Find(del.Id);
-
-            if (cus != null)
+            var customer = await _dataContext.Customers.FindAsync(updateCustomer.Id);
+            if (customer != null)
             {
-                dbCon.Customers.Remove(cus);
+                customer.Name = updateCustomer.Name;
+                customer.PhoneNumber = updateCustomer.PhoneNumber;
 
-                await dbCon.SaveChangesAsync();
+                await _dataContext.SaveChangesAsync();
 
                 return RedirectToAction("View");
             }
+
+            return RedirectToAction("View");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var customer = _dataContext.Customers.Find(id);
+
+            if (customer != null)
+            {
+                _dataContext.Customers.Remove(customer);
+
+                await _dataContext.SaveChangesAsync();
+
+                return RedirectToAction("View");
+            }
+
             return RedirectToAction("View");
         }
     }

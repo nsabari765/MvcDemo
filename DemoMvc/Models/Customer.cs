@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DemoMvc.Models.Customer
+namespace DemoMvc.Models
 {
     public class Customer
     {
