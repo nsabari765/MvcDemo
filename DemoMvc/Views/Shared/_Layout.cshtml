@@ -20,21 +20,21 @@
 
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Employee
+                        Employee
                     </button>
                     <ul class="dropdown-menu">
-                         <li class="nav-item dropdown-item">
-                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Add">Add</a>
-                         </li>
-                        
-                         <li class="nav-item dropdown-item">
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Add">Add</a>
+                        </li>
+
+                        <li class="nav-item dropdown-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="View">View</a>
                         </li>
 
                     </ul>
                 </div>
-               
-                
+
+
                 <div class="dropdown px-3">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Customer
@@ -50,10 +50,26 @@
 
                     </ul>
                 </div>
-                
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    </div>
+
+                <div class="dropdown px-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Department
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Add">Add</a>
+                        </li>
+
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="View">View</a>
+                        </li>
+
+                    </ul>
                 </div>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                </div>
+            </div>
         </nav>
     </header>
     <div class="container">
