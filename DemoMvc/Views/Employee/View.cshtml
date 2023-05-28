@@ -31,7 +31,7 @@
                 <td>@emp.Department</td>
                 <td>@emp.PhoneNumber</td>
                 <td>@emp.City</td>
-                <th><a href="Employee/View/@emp.Id">Update</a></th>
+                <th>@Html.ActionLink("update","Update","Employee", new {id = @emp.Id})</th>
             </tr>
         }
     </tbody>

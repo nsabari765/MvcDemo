@@ -15,83 +15,58 @@ namespace DemoMvc.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> View(Employee employee)
+        public async Task<IActionResult> View()
         {
             var employees = await dataContext.Employees.ToListAsync();
-            return View(employees); 
+            return View(employees);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View(new Employee());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddEmployeeModel addEmployeeRequest)
+        public async Task<IActionResult> Add(Employee addEmployeeRequest)
         {
-            var employee = new Employee();
-
             if (ModelState.IsValid)
             {
-                
-                employee.Id = Guid.NewGuid();
-                employee.Name = addEmployeeRequest.Name;
-                employee.Salary = addEmployeeRequest.Salary;
-                employee.Email = addEmployeeRequest.Email;
-                employee.DateOfBirth = addEmployeeRequest.DateOfBirth;
-                employee.Department = addEmployeeRequest.Department;
-                employee.PhoneNumber = addEmployeeRequest.PhoneNumber;
-                employee.City = addEmployeeRequest.City;
-
-                await dataContext.Employees.AddAsync(employee);
+                await dataContext.Employees.AddAsync(addEmployeeRequest);
                 await dataContext.SaveChangesAsync();
                 return RedirectToAction("Add");
             }
 
-            return View();
+            return View(new Employee());
         }
 
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-           var employee = await dataContext.Employees.FirstOrDefaultAsync(em => em.Id == id);
+            var employee = await dataContext.Employees.FirstOrDefaultAsync(em => em.Id == id);
 
             if (employee != null)
             {
-                var employees = new UpdateEmployeeDetails()
-                {
-                    Id = employee.Id,
-                    Name = employee.Name,
-                    Salary = employee.Salary,
-                    Email = employee.Email,
-                    DateOfBirth= employee.DateOfBirth,
-                    Department= employee.Department,
-                    PhoneNumber=employee.PhoneNumber,
-                    City = employee.City
-
-                };
-
-                return await Task.Run(() => View("Update",employees));
+                return await Task.Run(() => View("Update", employee));
             }
-           
-           return RedirectToAction("View");
+
+            return RedirectToAction("View");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateEmployeeDetails up)
+        public async Task<IActionResult> Update(Employee update)
         {
-            var employee = await dataContext.Employees.FindAsync(up.Id);
+            var employee = await dataContext.Employees.FindAsync(update.Id);
 
             if (employee != null)
             {
-                employee.Name = up.Name;
-                employee.Email = up.Email;
-                employee.Salary = up.Salary;
-                employee.DateOfBirth = up.DateOfBirth;
-                employee.Department = up.Department;
-                employee.PhoneNumber = up.PhoneNumber;
-                employee.City = up.City;
+                employee.Name = update.Name;
+                employee.Email = update.Email;
+                employee.Salary = update.Salary;
+                employee.DateOfBirth = update.DateOfBirth;
+                employee.Department = update.Department;
+                employee.PhoneNumber = update.PhoneNumber;
+                employee.City = update.City;
 
                 await dataContext.SaveChangesAsync();
 
@@ -102,7 +77,7 @@ namespace DemoMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(UpdateEmployeeDetails del)
+        public async Task<IActionResult> Delete(Employee del)
         {
             var employee = dataContext.Employees.Find(del.Id);
 
@@ -110,7 +85,7 @@ namespace DemoMvc.Controllers
             {
                 dataContext.Employees.Remove(employee);
 
-               await  dataContext.SaveChangesAsync();
+                await dataContext.SaveChangesAsync();
 
                 return RedirectToAction("View");
             }
