@@ -1,5 +1,7 @@
 ﻿@model DemoMvc.Models.Employee
 
+@inject DemoMvc.Repository.IDepartmentRepository DepartmentRepository
+
 @Html.ValidationSummary()
 <form method="post" action="Add" class="mt-10">
     <div class="mb-3">
@@ -26,8 +28,11 @@
 
     <div class="mb-3">
         <label for="" class="form-label" action="Add">Department</label>
-        <input type="text" class="form-control" asp-for="Department">
-        <span asp-validation-for="Department"></span>
+        <select asp-for="DepartmentId" id="DepartmentId" class="form-control border selectpicker" data-live-search="true"
+                asp-items="@(new SelectList(await DepartmentRepository.GetDepartments() , "Id", "Name"))">
+            <option selected>--- SELECT ---</option>
+        </select>
+        <span asp-validation-for="DepartmentId"></span>
     </div>
 
     <div class="mb-3">

@@ -1,4 +1,5 @@
 using DemoMvc.Data;
+using DemoMvc.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DataContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("MVCDemo")));
+builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 
 var app = builder.Build();
 

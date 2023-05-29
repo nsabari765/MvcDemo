@@ -1,5 +1,7 @@
 ﻿@model DemoMvc.Models.Employee;
 
+@inject DemoMvc.Repository.IDepartmentRepository DepartmentRepository
+
 @{
     ViewBag.Title = "Update Employee Details";
 }
@@ -34,7 +36,10 @@
 
     <div class="mb-3">
         <label for="" class="form-label" action="View">Department</label>
-        <input type="text" class="form-control" asp-for="Department">
+        <select asp-for="DepartmentId" id="DepartmentId" class="form-control border selectpicker" data-live-search="true"
+                asp-items="@(new SelectList(await DepartmentRepository.GetDepartments() , "Id", "Name"))">
+            <option selected>--- SELECT ---</option>
+        </select>
     </div>
 
     <div class="mb-3">

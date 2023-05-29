@@ -1,6 +1,7 @@
 ﻿using DemoMvc.Data;
 using DemoMvc.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoMvc.Controllers
@@ -64,7 +65,7 @@ namespace DemoMvc.Controllers
                 employee.Email = update.Email;
                 employee.Salary = update.Salary;
                 employee.DateOfBirth = update.DateOfBirth;
-                employee.Department = update.Department;
+                employee.DepartmentId = update.DepartmentId;
                 employee.PhoneNumber = update.PhoneNumber;
                 employee.City = update.City;
 

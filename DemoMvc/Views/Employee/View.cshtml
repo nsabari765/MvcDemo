@@ -1,4 +1,7 @@
-﻿@model List<DemoMvc.Models.Employee>
+﻿@using DemoMvc.Repository;
+@model List<DemoMvc.Models.Employee>
+
+@inject IDepartmentRepository DepartmentRespository
 @{
     ViewData["Title"] = "Employees";
 }
@@ -20,18 +23,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var emp in Model)
+        @foreach (var dep in Model)
         {
             <tr>
-                <td>@emp.Id</td>
-                <td>@emp.Name</td>
-                <td>@emp.Email</td>
-                <td>@emp.Salary</td>
-                <td>@emp.DateOfBirth.Value.ToString("dd/mm/yyyy")</td>
-                <td>@emp.Department</td>
-                <td>@emp.PhoneNumber</td>
-                <td>@emp.City</td>
-                <th>@Html.ActionLink("update","Update","Employee", new {id = @emp.Id})</th>
+                <td>@dep.Id</td>
+                <td>@dep.Name</td>
+                <td>@dep.Email</td>
+                <td>@dep.Salary</td>
+                <td>@dep.DateOfBirth.Value.ToString("dd/mm/yyyy")</td>
+                <td>
+                    @{
+                        var departmentName = await DepartmentRespository.GetDepartmentNameById(dep.DepartmentId);
+                    }
+                    @departmentName
+                </td>
+                <td>@dep.PhoneNumber</td>
+                <td>@dep.City</td>
+                <th>@Html.ActionLink("update","Update","Employee", new {id = @dep.Id})</th>
             </tr>
         }
     </tbody>
