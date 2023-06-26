@@ -30,7 +30,21 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(Department department)
         {
-            await _dataContext.AddAsync(department);
+            await _dataContext.Departments.AddAsync(department);
+
+            await _dataContext.SaveChangesAsync();
+
+            var departmentId = (await _dataContext.Departments.ToListAsync()).Max(x => x.Id);
+
+            foreach (var incharge in department.Incharge)
+            {
+                if (!string.IsNullOrEmpty(incharge.InchargeName))
+                {
+                    incharge.DepartmentId = departmentId;
+                    _dataContext.Incharges.Add(incharge);
+                }
+            }
+
             await _dataContext.SaveChangesAsync();
             return RedirectToAction("View");
         }

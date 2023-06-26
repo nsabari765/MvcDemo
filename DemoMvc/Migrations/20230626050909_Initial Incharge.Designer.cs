@@ -4,6 +4,7 @@ using DemoMvc.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoMvc.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230626050909_Initial Incharge")]
+    partial class InitialIncharge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,7 +112,25 @@ namespace DemoMvc.Migrations
 
                     b.HasKey("InchargeId");
 
+                    b.HasIndex("DepartmentId")
+                        .IsUnique();
+
                     b.ToTable("Incharges");
+                });
+
+            modelBuilder.Entity("DemoMvc.Models.Incharge", b =>
+                {
+                    b.HasOne("DemoMvc.Models.Department", null)
+                        .WithOne("Incharge")
+                        .HasForeignKey("DemoMvc.Models.Incharge", "DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DemoMvc.Models.Department", b =>
+                {
+                    b.Navigation("Incharge")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

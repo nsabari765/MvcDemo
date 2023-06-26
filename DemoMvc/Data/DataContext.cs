@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DemoMvc.Data
 {
-
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions options) : base(options)
@@ -13,5 +12,6 @@ namespace DemoMvc.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Incharge> Incharges { get; set; }
     }
 }
