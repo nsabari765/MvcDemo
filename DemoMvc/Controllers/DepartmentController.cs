@@ -2,22 +2,23 @@
 using DemoMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DemoMvc.Repository;
 
 namespace DemoMvc.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly DataContext _dataContext;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public DepartmentController(DataContext dataContext)
+        public DepartmentController(IDepartmentRepository departmentRepository)
         {
-            _dataContext = dataContext;
+            _departmentRepository = departmentRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult> View()
         {
-            var departments = await _dataContext.Departments.ToListAsync();
+            var departments = await _departmentRepository.GetAllDepartment();
             return View(departments);
         }
 
@@ -30,29 +31,15 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(Department department)
         {
-            await _dataContext.Departments.AddAsync(department);
+            var depart = await _departmentRepository.Department(department);
 
-            await _dataContext.SaveChangesAsync();
-
-            var departmentId = (await _dataContext.Departments.ToListAsync()).Max(x => x.Id);
-
-            foreach (var incharge in department.Incharge)
-            {
-                if (!string.IsNullOrEmpty(incharge.InchargeName))
-                {
-                    incharge.DepartmentId = departmentId;
-                    _dataContext.Incharges.Add(incharge);
-                }
-            }
-
-            await _dataContext.SaveChangesAsync();
             return RedirectToAction("View");
         }
 
         [HttpGet]
         public async Task<ActionResult> Update(int id)
         {
-            var department = await _dataContext.Departments.FirstOrDefaultAsync(x => x.Id == id);
+            var department = await _departmentRepository.Get(id);
 
             if (department != null)
             {
@@ -65,33 +52,14 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Update(Department updateDepartment)
         {
-            var department = await _dataContext.Departments.FindAsync(updateDepartment.Id);
-            if (department != null)
-            {
-                department.Name = updateDepartment.Name;
-
-                await _dataContext.SaveChangesAsync();
-
-                return RedirectToAction("View");
-            }
-
+            var department = await _departmentRepository.UpdateDepartment(updateDepartment);
             return RedirectToAction("View");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var department = _dataContext.Departments.Find(id);
-
-            if (department != null)
-            {
-                _dataContext.Departments.Remove(department);
-
-                await _dataContext.SaveChangesAsync();
-
-                return RedirectToAction("View");
-            }
-
+            var del = await _departmentRepository.Delete(id);
             return RedirectToAction("View");
         }
     }
