@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoMvc.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230626050909_Initial Incharge")]
-    partial class InitialIncharge
+    [Migration("20230627063031_Alter Incharge")]
+    partial class AlterIncharge
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace DemoMvc.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("DemoMvc.Models.Incharge", b =>
+            modelBuilder.Entity("DemoMvc.Models.Incharges", b =>
                 {
                     b.Property<int>("InchargeId")
                         .ValueGeneratedOnAdd()
@@ -110,27 +110,12 @@ namespace DemoMvc.Migrations
                     b.Property<string>("InchargeName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SerialNumber")
+                        .HasColumnType("int");
+
                     b.HasKey("InchargeId");
 
-                    b.HasIndex("DepartmentId")
-                        .IsUnique();
-
                     b.ToTable("Incharges");
-                });
-
-            modelBuilder.Entity("DemoMvc.Models.Incharge", b =>
-                {
-                    b.HasOne("DemoMvc.Models.Department", null)
-                        .WithOne("Incharge")
-                        .HasForeignKey("DemoMvc.Models.Incharge", "DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DemoMvc.Models.Department", b =>
-                {
-                    b.Navigation("Incharge")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

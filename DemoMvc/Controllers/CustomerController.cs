@@ -17,7 +17,7 @@ namespace DemoMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> View()
         {
-            var customers = await _dataContext.Customers.ToListAsync();
+            var customers = await _dataContext.Customer.ToListAsync();
             return View(customers);
         }
 
@@ -38,7 +38,7 @@ namespace DemoMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Update(int id)
         {
-            var customer = await _dataContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
+            var customer = await _dataContext.Customer.FirstOrDefaultAsync(x => x.Id == id);
 
             if (customer != null)
             {
@@ -51,7 +51,7 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Update(Customer updateCustomer)
         {
-            var customer = await _dataContext.Customers.FindAsync(updateCustomer.Id);
+            var customer = await _dataContext.Customer.FindAsync(updateCustomer.Id);
             if (customer != null)
             {
                 customer.Name = updateCustomer.Name;
@@ -68,11 +68,11 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var customer = _dataContext.Customers.Find(id);
+            var customer = _dataContext.Customer.Find(id);
 
             if (customer != null)
             {
-                _dataContext.Customers.Remove(customer);
+                _dataContext.Customer.Remove(customer);
 
                 await _dataContext.SaveChangesAsync();
 

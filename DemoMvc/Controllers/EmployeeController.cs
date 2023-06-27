@@ -18,7 +18,7 @@ namespace DemoMvc.Controllers
         [HttpGet]
         public async Task<IActionResult> View()
         {
-            var employees = await dataContext.Employees.ToListAsync();
+            var employees = await dataContext.Employee.ToListAsync();
             return View(employees);
         }
 
@@ -33,7 +33,7 @@ namespace DemoMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                await dataContext.Employees.AddAsync(addEmployeeRequest);
+                await dataContext.Employee.AddAsync(addEmployeeRequest);
                 await dataContext.SaveChangesAsync();
                 return RedirectToAction("Add");
             }
@@ -44,7 +44,7 @@ namespace DemoMvc.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var employee = await dataContext.Employees.FirstOrDefaultAsync(em => em.Id == id);
+            var employee = await dataContext.Employee.FirstOrDefaultAsync(em => em.Id == id);
 
             if (employee != null)
             {
@@ -57,7 +57,7 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Employee update)
         {
-            var employee = await dataContext.Employees.FindAsync(update.Id);
+            var employee = await dataContext.Employee.FindAsync(update.Id);
 
             if (employee != null)
             {
@@ -80,11 +80,11 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Employee del)
         {
-            var employee = dataContext.Employees.Find(del.Id);
+            var employee = dataContext.Employee.Find(del.Id);
 
             if (employee != null)
             {
-                dataContext.Employees.Remove(employee);
+                dataContext.Employee.Remove(employee);
 
                 await dataContext.SaveChangesAsync();
 

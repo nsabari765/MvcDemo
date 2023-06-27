@@ -4,6 +4,7 @@ using DemoMvc.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoMvc.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230627053423_Initial Incharge")]
+    partial class InitialIncharge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace DemoMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("DemoMvc.Models.Department", b =>
@@ -54,7 +56,7 @@ namespace DemoMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("DemoMvc.Models.Employee", b =>
@@ -91,10 +93,10 @@ namespace DemoMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("DemoMvc.Models.Incharge", b =>
+            modelBuilder.Entity("DemoMvc.Models.Incharges", b =>
                 {
                     b.Property<int>("InchargeId")
                         .ValueGeneratedOnAdd()
@@ -113,7 +115,7 @@ namespace DemoMvc.Migrations
 
                     b.HasKey("InchargeId");
 
-                    b.ToTable("Incharge");
+                    b.ToTable("Incharges");
                 });
 #pragma warning restore 612, 618
         }
