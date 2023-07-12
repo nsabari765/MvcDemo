@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +13,9 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddDbContext<DataContactAPI>(Option => Option.UseInMemoryDatabase("ContactDb"));
 
-builder.Services.AddDbContext<DataContactAPI>(option =>
+builder.Services.AddDbContext<DataContext>(option =>
                                    option.UseSqlServer(builder.Configuration.GetConnectionString("ContactsConnection")));
-
+builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

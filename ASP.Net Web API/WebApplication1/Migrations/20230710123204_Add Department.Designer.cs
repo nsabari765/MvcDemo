@@ -10,7 +10,7 @@ using WebApplication1.Data;
 
 namespace WebApplication1.Migrations
 {
-    [DbContext(typeof(DataContactAPI))]
+    [DbContext(typeof(DataContext))]
     [Migration("20230710123204_Add Department")]
     partial class AddDepartment
     {

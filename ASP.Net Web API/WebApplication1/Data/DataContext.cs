@@ -3,9 +3,9 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Data
 {
-    public class DataContactAPI : DbContext
+    public class DataContext : DbContext
     {
-        public DataContactAPI(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions options) : base(options)
         {
         }
 

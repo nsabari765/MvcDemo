@@ -9,7 +9,7 @@ using WebApplication1.Data;
 
 namespace WebApplication1.Migrations
 {
-    [DbContext(typeof(DataContactAPI))]
+    [DbContext(typeof(DataContext))]
     partial class DataContactAPIModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

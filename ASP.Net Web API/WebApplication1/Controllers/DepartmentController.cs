@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers
 {
@@ -10,71 +11,47 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        public readonly DataContactAPI _dataContext;
+        public readonly DataContext _dataContext;
+        public readonly IDepartmentRepository _departmentRepository;
 
-        public DepartmentController(DataContactAPI dataContext)
+        public DepartmentController(DataContext dataContext, IDepartmentRepository departmentRepository)
         {
             _dataContext = dataContext;
+            _departmentRepository = departmentRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetDepartments()
         {
-            return Ok(await _dataContext.Department.ToListAsync());
+            return Ok(await _departmentRepository.GetDepartments());
         }
 
         [HttpPost]
         [Route("Post")]
         public async Task<IActionResult> AddDepartment([FromBody] Department department)
         {
-            await _dataContext.Department.AddAsync(department);
-            await _dataContext.SaveChangesAsync();
-            return Ok(department);
+            return Ok(await _departmentRepository.AddDepartment(department));
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> GetDepartmentById([FromRoute] int id)
         {
-            var find = await _dataContext.Department.FindAsync(id);
-
-            if (find != null)
-            {
-                return Ok(find);
-            }
-            return NotFound();
+            return Ok(await _departmentRepository.GetDepartmentById(id));
         }
 
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> UpdateDepartment([FromRoute] int id, Department UpdateDepartment)
         {
-            var find = await _dataContext.Department.FindAsync(id);
-
-            if (find != null)
-            {
-                find.DepartmentName = UpdateDepartment.DepartmentName;
-                find.DepartmentHODName = UpdateDepartment.DepartmentHODName;
-
-                await _dataContext.SaveChangesAsync();
-                return Ok(find);
-            }
-            return BadRequest();
+            return Ok(await _departmentRepository.UpdateDepartment(id, UpdateDepartment));
         }
 
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> DeleteDepartment([FromRoute] int id)
         {
-            var find = await _dataContext.Department.FindAsync(id);
-
-            if (find != null)
-            {
-                _dataContext.Remove(find);
-                await _dataContext.SaveChangesAsync();
-                return Ok(find);
-            }
-            return NotFound("This Id is Not Found");
+            return Ok(await _departmentRepository.DeleteDepartment(id));
         }
     }
 }

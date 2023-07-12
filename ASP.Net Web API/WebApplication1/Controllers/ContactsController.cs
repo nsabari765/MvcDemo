@@ -9,9 +9,9 @@ namespace WebApplication1.Controllers
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
-        private readonly DataContactAPI dbcontact;
+        private readonly DataContext dbcontact;
 
-        public ContactsController(DataContactAPI dbcontact)
+        public ContactsController(DataContext dbcontact)
         {
             this.dbcontact = dbcontact;
         }
