@@ -40,14 +40,47 @@
         <span asp-validation-for="City"></span>
     </div>
 
-    <div class="mb-3">
-        <label for="" class="form-label" action="Add">Phone Number</label>
-        <input type="text" class="form-control" asp-for="PhoneNumber">
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    <div class="col-md-11 mb-2">
+        <div class="row">
+            <div class="col-md-11">
+                <label for="" class="form-label" action="Add">Phone Number</label>
+                <input type="text" class="form-control" asp-for="PhoneNumber">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="col-md-1 mt-4">
+                <button type="button" class="btn btn-primary" id="addNew" onclick="Repeat()">+</button>
+            </div>
+        </div>
     </div>
 
-
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <td><button type="button" class="btn btn-primary addRow">+</button></td>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i = 1; i <= 100; i++)
+            {
+                var serialNumber = i;
+                <tr>
+                    <th scope="row">@serialNumber</th>
+                    <td><input type="text" name="FirstName[]" placeholder="FirstName" /></td>
+                    <td><input type="text" name="LastName[]" placeholder="LastName" /></td>
+                    <td><input type="text" name="HandlerName[]" placeholder="HandlerName" /></td>
+                    <td><button type="button" class="btn btn-danger deleteRow">-</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/Common/Common.js"></script>
 

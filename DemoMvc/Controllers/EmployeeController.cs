@@ -1,7 +1,6 @@
 ﻿using DemoMvc.Data;
 using DemoMvc.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoMvc.Controllers

@@ -1,0 +1,56 @@
+﻿@model Registration
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration</h2>
+        <form action="process_registration.php" method="POST">
+            <form method="post" action="Add" class="mt-10">
+                <div class="mb-3">
+                    <label for="" class="form-label" action="Add">UserName</label>
+                    <input type="text" class="form-control" asp-for="UserName">
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label" action="Add">Password</label>
+                    <input type="password" class="form-control" asp-for="Password">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </form>
+    </div>
+</body>
+</html>

@@ -7,12 +7,16 @@
 
 
 <form method="post" action="Add" class="mt-10">
-    <div class="mb-3">
-        <label for="" class="form-label" action="Add">Name</label>
-        <input type="text" class="form-control" asp-for="Name">
-        <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="row addName">
+        <div class="mb-3 col-md-11">
+            <label for="" class="form-label" action="Add">Name</label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary" id="addNew">+</button>
+        </div>
     </div>
-
     <div class="row">
     <div class="col-md-12">
         <div class="card card-warning">
@@ -51,4 +55,7 @@
 
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
+<script src="~/js/Common/Common.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 

@@ -8,7 +8,7 @@
 
 <h1>Employees</h1>
 
-<table class="table">
+<table class="table" id="dataTableList">
     <thead>
         <tr>
             <th>Id</th>
@@ -44,4 +44,5 @@
         }
     </tbody>
 </table>
+@await Component.InvokeAsync("DataTable")
 
