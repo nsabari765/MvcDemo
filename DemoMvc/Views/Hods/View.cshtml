@@ -1,0 +1,29 @@
+﻿@model List<HodName>
+@{
+    ViewData["Title"] = "Show Hod Name";
+}
+
+<h1>Show Departments Details</h1>
+
+<table class="table mt-5 table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cus in Model)
+        {
+            <tr>
+                <td>@cus.Id</td>
+                <td>@cus.Name</td>
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = cus.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

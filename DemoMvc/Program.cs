@@ -1,7 +1,9 @@
+using AutoMapper;
 using DemoMvc.Data;
+using DemoMvc.Handler;
 using DemoMvc.Repository;
+using DemoMvc.Repository.HodRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("MVCDemo")));
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddTransient<HodRepository>();
+
+var autoMapper = new MapperConfiguration(x => x.AddProfile(new AutoMappingHandler()));
+IMapper mapper = autoMapper.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

@@ -4,7 +4,7 @@
 
 namespace DemoMvc.Migrations
 {
-    public partial class InitialIncharge : Migration
+    public partial class UpdateHodnameModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

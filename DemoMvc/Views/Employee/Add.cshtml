@@ -60,19 +60,19 @@
                 <th scope="col">First</th>
                 <th scope="col">Last</th>
                 <th scope="col">Handle</th>
-                <td><button type="button" class="btn btn-primary addRow">+</button></td>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tableList">
             @for(int i = 1; i <= 100; i++)
             {
                 var serialNumber = i;
-                <tr>
+                <tr id="@serialNumber">
                     <th scope="row">@serialNumber</th>
                     <td><input type="text" name="FirstName[]" placeholder="FirstName" /></td>
                     <td><input type="text" name="LastName[]" placeholder="LastName" /></td>
                     <td><input type="text" name="HandlerName[]" placeholder="HandlerName" /></td>
-                    <td><button type="button" class="btn btn-danger deleteRow">-</button></td>
+                    <td><button type="button" class="btn btn-primary" onclick="addNewRow(@serialNumber)">+</button></td>
+                    <td><button type="button" class="btn btn-danger hideRow" id="@serialNumber" onclick="hideRow(@serialNumber)">-</button></td>
                 </tr>
             }
         </tbody>

@@ -13,5 +13,6 @@ namespace DemoMvc.Data
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<Incharge> Incharge { get; set; }
+        public DbSet<HodName> HodName { get; set; }
     }
 }

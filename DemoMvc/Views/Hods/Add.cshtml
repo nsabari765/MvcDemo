@@ -1,0 +1,26 @@
+﻿@model HodName
+@inject DemoMvc.Repository.IDepartmentRepository DepartmentRepository
+
+@Html.ValidationSummary()
+<form method="post" action="SaveUpdate" class="mt-10">
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label" action="Add">Department</label>
+        <select asp-for="DepartmentId" id="DepartmentId" class="form-control border selectpicker" data-live-search="true"
+                asp-items="@(new SelectList(await DepartmentRepository.GetDepartments() , "Id", "Name"))">
+            <option selected>--- SELECT ---</option>
+        </select>
+        <span asp-validation-for="DepartmentId"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/Common/Common.js"></script>
+

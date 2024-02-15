@@ -16,7 +16,7 @@ namespace DemoMvc.Models
         public long? Salary { get; set; }
 
         [Required]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public int? DepartmentId { get; set; }
         public long? PhoneNumber { get; set; }

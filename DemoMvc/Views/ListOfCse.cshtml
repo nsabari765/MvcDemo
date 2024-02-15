@@ -11,7 +11,6 @@
 <table class="table" id="dataTableList">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Email</th>
             <th>Salary</th>
@@ -19,18 +18,16 @@
             <th>Department</th>
             <th>Phone Number</th>
             <th>City</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var dep in Model)
         {
             <tr>
-                <td>@dep.Id</td>
                 <td>@dep.Name</td>
                 <td>@dep.Email</td>
                 <td>@dep.Salary</td>
-                <td>@dep.DateOfBirth.ToString("dd/mm/yyyy")</td>
+                <td>@dep.DateOfBirth.ToString("dd/MM/yyyy")</td>
                 <td>
                     @{
                         var departmentName = await DepartmentRespository.GetDepartmentNameById(dep.DepartmentId);
@@ -39,7 +36,6 @@
                 </td>
                 <td>@dep.PhoneNumber</td>
                 <td>@dep.City</td>
-                <th>@Html.ActionLink("update","Update","Employee", new {id = @dep.Id})</th>
             </tr>
         }
     </tbody>

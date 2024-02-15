@@ -1,8 +1,6 @@
-﻿using DemoMvc.Data;
-using DemoMvc.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using DemoMvc.Models;
 using DemoMvc.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DemoMvc.Controllers
 {
@@ -31,7 +29,7 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(Department department)
         {
-            var depart = await _departmentRepository.Department(department);
+            await _departmentRepository.Department(department);
 
             return RedirectToAction("View");
         }
@@ -52,14 +50,14 @@ namespace DemoMvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Update(Department updateDepartment)
         {
-            var department = await _departmentRepository.UpdateDepartment(updateDepartment);
+            await _departmentRepository.UpdateDepartment(updateDepartment);
             return RedirectToAction("View");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var del = await _departmentRepository.Delete(id);
+            await _departmentRepository.Delete(id);
             return RedirectToAction("View");
         }
     }
