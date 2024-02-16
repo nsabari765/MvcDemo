@@ -1,10 +1,12 @@
 ﻿using DemoMvc.Data;
 using DemoMvc.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoMvc.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly DataContext dataContext;

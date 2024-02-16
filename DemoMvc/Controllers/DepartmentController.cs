@@ -1,9 +1,11 @@
 ﻿using DemoMvc.Models;
 using DemoMvc.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoMvc.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _departmentRepository;

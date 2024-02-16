@@ -1,10 +1,12 @@
 ﻿using DemoMvc.Data;
 using DemoMvc.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoMvc.Controllers
 {
+    
     public class CustomerController : Controller
     {
         private readonly DataContext _dataContext;
@@ -21,12 +23,14 @@ namespace DemoMvc.Controllers
             return View(customers);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Add()
         {
             return View(new Customer());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> Add(Customer customer)
         {
@@ -35,6 +39,7 @@ namespace DemoMvc.Controllers
             return RedirectToAction("View");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> Update(int id)
         {
@@ -48,6 +53,7 @@ namespace DemoMvc.Controllers
             return RedirectToAction("View");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> Update(Customer updateCustomer)
         {
@@ -65,6 +71,7 @@ namespace DemoMvc.Controllers
             return RedirectToAction("View");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

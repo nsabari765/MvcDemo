@@ -1,9 +1,11 @@
 ﻿using DemoMvc.Models;
 using DemoMvc.Repository.HodRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoMvc.Controllers
 {
+    [Authorize]
     public class HodController : Controller
     {
         private readonly HodRepository _hodRepository;

@@ -1,0 +1,26 @@
+﻿@model IdentityRole
+@{
+    ViewData["Title"] = "Add Identity Role";
+}
+
+<h1>Add Identity Role</h1>
+
+
+<form method="post" action="Create" class="mt-10">
+    <div class="row addName">
+        <div class="mb-3 col-md-11">
+            <label for="" class="form-label" action="Create">Name</label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-11">
+            <label for="" class="form-label" action="Create">Normalized  Name</label>
+            <input type="text" class="form-control" asp-for="NormalizedName">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+<script src="~/js/Common/Common.js"></script>
+
+

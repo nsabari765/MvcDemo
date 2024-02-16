@@ -4,6 +4,7 @@ using DemoMvc.Handler;
 using DemoMvc.Repository;
 using DemoMvc.Repository.HodRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,11 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DataContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("MVCDemo")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>().AddDefaultTokenProviders()
+    .AddRoles<IdentityRole>() 
+    .AddEntityFrameworkStores<DataContext>();
+
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddTransient<HodRepository>();
 
@@ -33,8 +39,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
+
+ //For Registration and Login (Both are Razor Pages)
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
